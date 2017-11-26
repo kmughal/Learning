@@ -1,0 +1,46 @@
+/* ------------------------ body ---------------------------*/
+
+.wrapper {
+    max-width: 95%;
+    max-height: 90%;
+    margin: auto;
+    margin-top: 50px;
+    box-shadow: 3px 3px olive, -1em 0 0.4em olive;
+}
+
+
+/* ------------------------ nav --------------------------*/
+
+nav {
+    ul {
+        li {
+            font-size: 0.85rem;
+        }
+    }
+}
+
+
+/* ------------------------ main -------------------------*/
+
+main {
+    .large-view-heading {
+        display: block;
+        color: black;
+        margin-bottom: 20px;
+        font-size: 6rem;
+        text-align: center;
+    }
+    .banner {
+        width: 50%;
+        float: left;
+        figure {
+            width: 100%;
+            img {
+                width: 97%;
+            }
+        }
+        h1 {
+            display: none;
+        }
+    }
+}

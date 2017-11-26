@@ -1,0 +1,128 @@
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+/*------------------------------------------------- BODY -------------------------------------------------*/
+
+body {
+    color: $primaryColor;
+    background-color: $primaryBackgroundColor;
+    font-family: $defaultFont;
+    font-size: 16px;
+}
+
+p {
+    padding: 5px 5px;
+}
+
+.wrapper {
+    max-width: 100%;
+    max-height: 100%;
+    margin-top: 0px;
+}
+
+
+/*------------------------------------------------- HEADER -------------------------------------------------*/
+
+header {
+    color: $headerColor;
+    background-color: $headerBackColor;
+    padding: 20px $gutter;
+    border-radius: 5px 5px;
+    h1 {
+        font-family: $headingFont;
+        text-align: center;
+        font-size: 2rem;
+        color: white;
+        margin-bottom: 20px;
+    }
+    h2 {
+        font-size: small;
+        text-align: center;
+    }
+}
+
+
+/*------------------------------------------------- NAV -------------------------------------------------*/
+
+nav {
+    padding: 20px $gutter;
+    ul {
+        li {
+            font-size: 0.5rem;
+            float: left;
+            width: 25%;
+            padding: 0px 0px;
+            border-right: 1px dashed rgb(124, 22, 184);
+            color: white;
+            background: rgba(165, 161, 161, 0.555);
+            a {
+                display: block;
+                text-decoration: none;
+                text-align: center;
+                color: $menuItemColor;
+                padding: 0.75rem 0;
+                transition: background .5s ease, color .5s ease;
+                &:hover {
+                    background-color: rgb(93, 21, 21);
+                    color: white;
+                }
+            }
+        }
+        li:last-child {
+            border: none;
+        }
+    }
+}
+
+
+/*------------------------------------------------- MAIN -------------------------------------------------*/
+
+main {
+    padding: 20px $gutter;
+    .blog-heading {
+        background-color: gold;
+        font-size: 3rem;
+        color: black;
+        padding: 40px;
+        width: 100% - $gutter+4;
+        text-align: center;
+    }
+    .large-view-heading {
+        display: none;
+    }
+    .banner {
+        figure {
+            width: 100%;
+            img {
+                width: 100%;
+            }
+        }
+        h1 {
+            color: darken(maroon, 50%);
+            border-bottom: 2px solid maroon;
+            padding: 20px 20px;
+            margin-bottom: 20px;
+        }
+    }
+    article {
+        font-family: $blogfontFamily;
+        color: $primaryColor;
+        margin-bottom: 20px;
+    }
+}
+
+
+/*------------------------------------------------- FOOTER -------------------------------------------------*/
+
+.clearfix:after {
+    content: " ";
+    display: table;
+    clear: both;
+}

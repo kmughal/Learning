@@ -1,0 +1,33 @@
+main {
+    .large-view-heading {
+        display: block;
+        color: black;
+        margin-bottom: 20px;
+        font-size: 6rem;
+        text-align: center;
+    }
+    .banner {
+        width: 25%;
+        float: left;
+        figure {
+            width: 100%;
+            img {
+                width: 97%;
+            }
+        }
+        h1 {
+            display: none;
+        }
+    }
+    article {
+        float: left;
+        width: 50%;
+        font-family: $blogfontFamily;
+        color: black;
+        margin-bottom: 20px;
+        padding: 5px 5px;
+    }
+    article:nth-child(2n+1) {
+        clear: left;
+    }
+}
