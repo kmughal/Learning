@@ -1,2 +1,6 @@
 *.css
 *.map
+.DS_Store
+advance-node/logs/*.log
+advance-node/files/*.*
+*.log.*
