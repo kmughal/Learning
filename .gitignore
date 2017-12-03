@@ -4,3 +4,5 @@
 advance-node/logs/*.log
 advance-node/files/*.*
 *.log.*
+node_modules
+dist
