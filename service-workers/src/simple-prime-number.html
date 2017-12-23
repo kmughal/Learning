@@ -1,0 +1,52 @@
+<!DOCHTML html>
+<html>
+
+<head>
+    <title>Simple [Prime number] example</title>
+</head>
+
+<body>
+    <h1>Simple Worker</h1>
+    <div>
+        <label for="">Number:</label>
+        <input type="text" id="input-num">
+    </div>
+    <div>
+        <button id="btn-generate">Generate</button>
+    </div>
+    <hr/>
+    <div id="output"></div>
+    <script>
+        var actionButton = document.querySelector("#btn-generate");
+
+        actionButton.addEventListener("click", buildPrimeNumber);
+
+        function buildPrimeNumber() {
+            var end = document.querySelector("#input-num").value,
+                output = document.querySelector("#output"),
+                start = 0,
+                result = ["<ul>"];
+
+            while (start < end) {
+                if (isPrime(start)) {
+                    result.push("<li>" + start + "</li>");
+                }
+                start++;
+            }
+            result.push("</ul>");
+
+            output.innerHTML = result.join("");
+        }
+
+        function isPrime(num) {
+            for (var i = 2; i < num; i++) {
+                if (num % i === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+</body>
+
+</html>

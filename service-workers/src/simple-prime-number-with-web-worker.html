@@ -1,0 +1,42 @@
+<!DOCHTML html>
+<html>
+
+<head>
+    <title>Simple worker example</title>
+</head>
+
+<body>
+    <h1>Simple Worker</h1>
+    <div>
+        <label for="">Number:</label>
+        <input type="text" id="input-num">
+    </div>
+    <div>
+        <button id="btn-generate">Generate</button>
+    </div>
+    <hr/>
+    <div id="output"></div>
+    <script>
+        var actionButton = document.querySelector("#btn-generate");
+
+        actionButton.addEventListener("click", buildPrimeNumber);
+
+        var worker = new Worker("./js/worker.js");
+
+        worker.addEventListener("message", showPrimeNumberList, false);
+
+        function showPrimeNumberList(e) {
+            document.querySelector('#output').innerHTML = e.data;
+        }
+
+        function buildPrimeNumber() {
+            var end = document.querySelector('#input-num').value,
+                output = document.querySelector('#output');
+             output.innerHTML = "<h1>Building prime numbers </h1>";
+             worker.postMessage({command : "start" , num : end});
+
+        }
+    </script>
+</body>
+
+</html>

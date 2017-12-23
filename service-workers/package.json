@@ -1,0 +1,6 @@
+{
+  "name": "service-workers",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}
