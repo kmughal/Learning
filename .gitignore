@@ -6,3 +6,5 @@ advance-node/files/*.*
 *.log.*
 node_modules
 dist
+writing-functional-code/bin/
+writing-functional-code/obj/
