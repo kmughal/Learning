@@ -5,13 +5,19 @@
 
     class Program {
         static void Main(string[] args) {
-            WriteLine("Hello World!");
-            // Make your code more funcational.
-            NullReferenceExample("null");
+            // WriteLine("Hello World!");
+            // // Make your code more funcational.
+            // NullReferenceExample("null");
 
-            Currency cur1 = Currency.Gbp, cur2 = Currency.USD;
-            Write($"{cur1} is {(cur1 == cur2 ? "equal" : "not equal")}  to {cur2}");
-          
+            // Currency cur1 = Currency.Gbp, cur2 = Currency.USD;
+            // Write($"{cur1} is {(cur1 == cur2 ? "equal" : "not equal")}  to {cur2}");
+
+            try {
+                var book = BookStore.Models.Book.Create(null, DateTime.Now);
+                Write($"{book.Name} was published in {book.PublishDate.ToString()}");
+            } catch (ArgumentNullException nullError) {
+                WriteLine(nullError.Message);
+            }
             Read();
         }
 
@@ -68,7 +74,7 @@
     }
 
     public static class ExtensionMethods {
-        public static TResult Map<T,TResult>(this T input , Func<T,TResult> map ) =>
+        public static TResult Map<T, TResult>(this T input, Func<T, TResult> map) =>
             map(input);
     }
 }
