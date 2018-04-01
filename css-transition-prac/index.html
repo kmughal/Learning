@@ -1,0 +1,106 @@
+<!DOCHTML <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: #f5f5f5;
+
+        }
+
+        #popup {
+            position: absolute;
+            left: -500px;
+            width: 500;
+            height: 80%;
+            top: 0px;
+            color: white;
+        }
+
+        .show {
+            transform: translateX(500px);
+            /* transition: all 0.5s ease-in; */
+            /* transition-property: transform, border;
+            transition-delay: 0.25s, 1s;
+            transition-duration: 1s, 1.5s; */
+            transition: transform 1.5s ease;
+            background: rgb(47, 43, 109);
+            /* border: 5px solid burlywood; */
+            padding: 10px 10px;
+        }
+
+        .hide {
+            transform: translateX(0px);
+            transition: all 600ms cubic-bezier(0.18, 0.89, 0.32, 1.28);
+
+        }
+
+        #progress-bar {
+
+            height: 50px;
+            background: blue;
+            margin-bottom: 50px;
+
+        }
+
+        .process {
+            background: olivedrab;
+            width: 600px;
+            transition-property: width;
+            transition-delay: 2.5s;
+            transition-duration: 2s;
+        }
+    </style>
+
+    <body>
+        <div id="progress-bar"></div>
+        <div id="popup">
+            <div>
+                <h2>What is Lorem Ipsum?</h2>
+                <p>
+                    <strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                    the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with
+                    the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+                    software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+            <p>
+                <button id="hide-popup">Hide</button>
+            </p>
+        </div>
+        <button id="show-popup">Show</button>
+
+    </body>
+
+    <script>
+
+        var btnShowPopup = document.querySelector("#show-popup"),
+            btnHidePopup = document.querySelector("#hide-popup"),
+            popup = document.querySelector("#popup"),
+            progress = document.querySelector("#progress-bar");
+
+
+        Element.prototype.toggleClass = function (class1, class2) {
+            var self = this;
+            self.className = self.classList.contains(class1) ? class2 : class1;
+            return self;
+        };
+        function togglePopup() {
+            popup.toggleClass("show", "hide");
+        }
+        btnShowPopup.addEventListener("click", function (e) {
+            togglePopup();
+            progress.toggleClass("process", "");
+            var width = parseInt(progress.style.width || 0, 10);
+            //  progress.style.width =  width + 100;
+        });
+        btnHidePopup.addEventListener("click", togglePopup);
+    </script>
+
+</html>

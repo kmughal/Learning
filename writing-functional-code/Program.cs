@@ -8,6 +8,7 @@ namespace writing_functional_code {
     using static System.Console;
     using Unit = System.ValueTuple;
     using System.Linq;
+    using System.Threading.Tasks;
     using FuntionalApproach.OptionalValues;
 
     class Author {
@@ -34,6 +35,13 @@ namespace writing_functional_code {
 
         public static NonNullValue<T> Create(T content) => new NonNullValue<T>(content);
 
+    }
+
+    public static class CurryExtensions {
+        public static Func<T2, R> Apply<T1, T2, R>(this Func<T1, T2, R> f, T1 t1) =>
+            t2 => f(t1, t2);
+
+        public static Func<T1, Func<T2, R>> Curry<T1, T2, R>(this Func<T1, T2, R> f) => t1 => t2 => f(t1, t2);
     }
 
     class Program {
@@ -74,7 +82,7 @@ namespace writing_functional_code {
 
             // For Each example
             new [] { 3, 4, 5, 6, 7, 8, 9 }
-                .Map1(i => i * i)
+            .Map1(i => i * i)
                 .ForEach(WriteLine);
 
             // Bind example
@@ -85,6 +93,48 @@ namespace writing_functional_code {
                 .Parse()
                 .Bind(Age.Of)
                 .Match(x => x, () => getAge());
+
+            TasksExample();
+
+            Func<string, string, string> greet = (a, b) => $"{a}-{b}";
+
+            var applyEx = greet.Apply("hello");
+            var curryingEx = greet.Curry();
+            
+            WriteLine(applyEx("boy"));
+            WriteLine(curryingEx("cool")("boy"));
+
+        }
+
+        static void TasksExample() {
+            var tasks = new List<Task>();
+            var noOfCores = System.Environment.ProcessorCount;
+            Action<int> action = (int arg) => {
+                long counter = 0;
+                WriteLine($"Starting task :{arg}");
+                while (counter < 600000000) {
+                    counter++;
+                }
+                WriteLine($"Ending task :{arg}");
+            };
+
+            Parallel.For(0, noOfCores, (int index) => action(index));
+            // WriteLine($"Only got {noOfCores}");
+            // for (var i = 0; i < noOfCores; i++) {
+
+            //     var t = Task.Factory.StartNew((arg) => {
+            //         long counter = 0;
+            //         WriteLine($"Starting task :{arg}");
+            //         while (counter < 600000000) {
+            //             counter++;
+            //         }
+            //         WriteLine($"Ending task :{arg}");
+            //     }, i, TaskCreationOptions.LongRunning);
+
+            //     tasks.Add(t);
+            // }
+
+            // Task.WaitAll(tasks.ToArray());
 
         }
 
