@@ -9,8 +9,68 @@
     <style>
         body {
             font-family: 'Courier New', Courier, monospace;
-            background: #f5f5f5;
+            background: black;
+            color: white
+        }
 
+        .test-indicator {
+            border: 5px solid #0019a8;
+            padding: 50px 50px;
+            margin: 20px 20px;
+            cursor: pointer;
+            font-size: large;
+            text-align: center;
+            color:white;
+            font-weight: bold;
+            background: #0019a8;
+        }
+
+        .test-indicator::after {
+            content: "";
+            position: absolute;
+            top: 123%;
+            /* top: 100%; */
+            left: 50%;
+            border-width: 25px;
+            border-style: solid;
+            border-color:#0019a8 transparent transparent transparent;
+        }
+
+        .button {
+            position: relative;
+            background-color: #4CAF50;
+            border: none;
+            font-size: 28px;
+            color: #FFFFFF;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            -webkit-transition-duration: 0.4s;
+            /* Safari */
+            transition-duration: 0.4s;
+            text-decoration: none;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .button:after {
+            content: "";
+            background: #90EE90;
+            display: block;
+            position: absolute;
+            padding-top: 300%;
+            padding-left: 350%;
+            margin-left: -20px!important;
+            margin-top: -120%;
+            opacity: 0;
+            transition: all 0.8s
+        }
+
+        .button:active:after {
+            padding: 0;
+            margin: 0;
+            opacity: 1;
+            transition: 0s
         }
 
         #popup {
@@ -20,6 +80,7 @@
             height: 80%;
             top: 0px;
             color: white;
+            z-index: 100;
         }
 
         .show {
@@ -41,7 +102,6 @@
         }
 
         #progress-bar {
-
             height: 50px;
             background: blue;
             margin-bottom: 50px;
@@ -55,10 +115,111 @@
             transition-delay: 2.5s;
             transition-duration: 2s;
         }
+
+        .animation {
+            animation: red-to-green 5s linear 1ms 1;
+        }
+
+        @keyframes red-to-green {
+            0% {
+                background: white;
+                color: black;
+            }
+            25% {
+                background: pink;
+                color: red;
+            }
+            50% {
+                background: burlywood;
+                color: blueviolet;
+            }
+            100% {
+                background: black;
+                color: white;
+            }
+        }
+
+        #simple-walk-container {
+            background: url(robot.png) 0 -50px no-repeat;
+            animation: simple-walk 2s steps(10) infinite;
+            margin: 0 auto;
+            width: 35px;
+            height: 40px;
+        }
+
+        @keyframes simple-walk {
+            100% {
+                background-position: -370px -50px;
+            }
+        }
+
+        .tool-tip {
+            background: white;
+            color: red;
+            cursor: pointer;
+            /* top: 100px; */
+            border: 1px solid purple;
+            padding: 5px 5px;
+        }
+
+        .tool-tip:hover {
+            animation: show-slowly 5s;
+        }
+
+        @keyframes show-slowly {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 
     <body>
-        <div id="progress-bar"></div>
+        <h1>CSS Transitions & animations </h1>
+
+        <div>
+            <div id="simple-walk-container">
+                <br>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div class="tool-tip">Show slowly</div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <div id="popup">
             <div>
                 <h2>What is Lorem Ipsum?</h2>
@@ -71,11 +232,28 @@
                     software like Aldus PageMaker including versions of Lorem Ipsum.</p>
             </div>
             <p>
-                <button id="hide-popup">Hide</button>
+                <button id="hide-popup" class="button">
+                    x Hide
+                </button>
             </p>
         </div>
-        <button id="show-popup">Show</button>
-
+        <button id="show-popup" class="button">
+            Show
+        </button>
+        <button id="btn-animate" class="button">Animate</button>
+        <div class="test-indicator">Test me</div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
     </body>
 
     <script>
@@ -83,8 +261,7 @@
         var btnShowPopup = document.querySelector("#show-popup"),
             btnHidePopup = document.querySelector("#hide-popup"),
             popup = document.querySelector("#popup"),
-            progress = document.querySelector("#progress-bar");
-
+            btnAnimate = document.querySelector("#btn-animate");
 
         Element.prototype.toggleClass = function (class1, class2) {
             var self = this;
@@ -93,14 +270,12 @@
         };
         function togglePopup() {
             popup.toggleClass("show", "hide");
+            // can use
+            //popup.classList.toggle("show");
         }
-        btnShowPopup.addEventListener("click", function (e) {
-            togglePopup();
-            progress.toggleClass("process", "");
-            var width = parseInt(progress.style.width || 0, 10);
-            //  progress.style.width =  width + 100;
-        });
+        btnShowPopup.addEventListener("click", togglePopup);
         btnHidePopup.addEventListener("click", togglePopup);
+        btnAnimate.addEventListener("click", function () { document.body.toggleClass("animation", ""); });
     </script>
 
 </html>
