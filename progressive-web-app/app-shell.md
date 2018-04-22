@@ -8,3 +8,12 @@ The html page can be broken into two parts:
 
 Manily the app shell remains the same only the content part is changed when user transition to different pages.
 
+
+
+
+
+
+
+## Important Urls to look:
+
+- [Inspire the way you do transition](http://www.appanimations.com/category/transition)
