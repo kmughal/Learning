@@ -3,6 +3,23 @@
 
 <head>
     <title>Simple worker example</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4285f4">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script>
+    
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("sw.js")
+            .then(function(r){
+                console.log("registration done", r);
+            })
+            .catch(function(err) {
+                console.log(err);
+            })
+        }
+    </script>
 </head>
 
 <body>
@@ -34,8 +51,19 @@
                 output = document.querySelector('#output');
              output.innerHTML = "<h1>Building prime numbers </h1>";
              worker.postMessage({command : "start" , num : end});
-
         }
+
+
+        function getLineMode() {
+            fetch("https://api.tfl.gov.uk/Line/Mode/tube")
+            .then(function(r)
+            { 
+                r.json()
+                .then(function(d){ 
+                    console.log(d);
+                })})
+        }
+        getLineMode();
     </script>
 </body>
 

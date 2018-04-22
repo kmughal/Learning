@@ -1,0 +1,9 @@
+{
+    "name": "progressive test",
+    "short_name": "progressive test",
+    "theme_color": "#f37f21",
+    "background_color": "#f3d821",
+    "display": "browser",
+    "scope": "/",
+    "start_url": "/"
+  }

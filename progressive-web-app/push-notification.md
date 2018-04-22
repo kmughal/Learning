@@ -139,7 +139,7 @@ function urlB64ToUint8Array(base64String) {
 - Third step is that message can be send to the browser
 - Fourth step is that you will handle this push message via service worker
 
-````js
+```js
 sw.addEventListener("push" , evt => {
     var payload = evt.data.json();
     evt.waitUntil(xxx);
