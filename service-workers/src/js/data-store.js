@@ -1,10 +1,50 @@
-var db = new Database();
-var $log = new Logger("data-html");
 
-var dbname = "students",
-    storename = "records";
+class Logger {
 
-function getMockData() {
+    constructor(id) {
+        this._id = "#" + id;
+    }
+
+    render(html, overrideId) {
+        html = `<div style="padding:10px 10px ;margin:10px 10px;">${html}</div>`;
+        this._id = overrideId ? "#" + overrideId : this._id;
+        document.querySelector(this._id).innerHTML += html;
+    }
+
+    log(html, id) {
+        this.render(html, id);
+    }
+
+
+    boldLog(html, id) {
+        this.render("<b>" + html + "</b>", id);
+    }
+
+    showJson(json, id) {
+        this.render(JSON.stringify(json, null, 2), id);
+    }
+
+    table(data, id) {
+        if (data.length) {
+            const table = `<table style="border:1px solid blue;" cellpadding="10">${data.map(function (item) {
+                var tds = "";
+                for (let index in item) {
+                    tds += `<td>${item[index]}</td>`;
+                }
+                return `<tr>${tds}</tr>`;
+            }).join("")}</table>`;
+            this.render(table, id);
+        }
+    };
+}
+
+
+const dbname = "students";
+const storename = "records";
+const db = new Database(dbname, storename);
+const $log = new Logger("data-html");
+
+const getMockData = function () {
     return new Promise(function (resolve, reject) {
         fetch("https://jsonplaceholder.typicode.com/albums")
             .then(function (response) {
@@ -16,13 +56,15 @@ function getMockData() {
                     });
             });
     });
-}
+};
 
 
-function Database() {
+function Database(dbName, storeName) {
     var self = this;
     var request, version = 1, dbname, storename;
-    var modes = { readOnly: "readonly", readwrite: "readwrite" };
+    const modes = { readOnly: "readonly", readwrite: "readwrite" };
+    const _dbname = dbName;
+    const _storename = storeName;
 
     function generateUUID() { // Public Domain/MIT
         var d = new Date().getTime();
@@ -37,27 +79,23 @@ function Database() {
     }
 
     var createTransaction = function (db) {
-        var result = db.transaction(storename, modes.readwrite);
+        const result = db.transaction(_storename, modes.readwrite);
         result.onComplete = function () {
             db.close();
         };
         return result;
     };
 
-    var openStore = function (tx) {
-        return tx.objectStore(storename);
-    };
+    const openStore = (tx) =>
+        tx.objectStore(_storename);
 
-    var openDatabase = function (name, storeName) {
-        dbname = name;
-        storename = storeName;
-
-        return new Promise(function (resolve, reject) {
-            request = indexedDB.open(name, version);
+    const openDatabase = () =>
+        new Promise(function (resolve, reject) {
+            request = indexedDB.open(_dbname, version);
 
             request.addEventListener("upgradeneeded", function (evt) {
                 var db = evt.target.result;
-                db.createObjectStore(storeName);
+                db.createObjectStore(_storename);
                 resolve(self);
             });
 
@@ -68,10 +106,9 @@ function Database() {
                 resolve({ database: db, transaction: tx, store: store });
             });
         });
-    };
 
-    var addNewItems = function (values) {
-        openDatabase(dbname, storename)
+    const addNewItems = (values) =>
+        openDatabase()
             .then(function (d) {
                 if (d.store) {
                     var store = d.store;
@@ -87,11 +124,10 @@ function Database() {
                     $log.table(values);
                 }
             });
-    }
 
-    var find = function (id) {
-        return new Promise(function (resolve, reject) {
-            openDatabase(dbname, storename)
+    const find = (id) =>
+        new Promise(function (resolve, reject) {
+            openDatabase()
                 .then(function (data) {
                     if (data.store) {
                         var op = data.store.get(parseInt(id));
@@ -107,7 +143,6 @@ function Database() {
                 });
         });
 
-    };
 
     return {
         create: openDatabase,
@@ -135,43 +170,4 @@ getMockData()
                             })
                     });
             });
-
     });
-
-
-function Logger(id) {
-    var _id = "#" + id;
-    var render = function (html, overrideId) {
-        html = `<div style="padding:10px 10px ;margin:10px 10px;">${html}</div>`;
-        _id = overrideId ? "#" + overrideId : _id;
-        document.querySelector(_id).innerHTML += html;
-    }
-    this.log = function (html, id) {
-        render(html, id);
-    };
-
-    this.boldLog = function (html, id) {
-        html = "<b>" + html + "</b>";
-        render(html, id);
-    };
-
-    this.showJson = function (json, id) {
-
-        render(JSON.stringify(json, null, 2), id);
-    }
-
-    this.table = function (data, id) {
-        if (data.length) {
-            var trs = "";
-            data.map(function (item) {
-                var tds = "";
-                for (let index in item) {
-                    tds += `<td>${item[index]}</td>`;
-                }
-                trs += `<tr>${tds}</tr>`;
-            });
-            var table = `<table style="border:1px solid blue;" cellpadding="10">${trs}</table>`;
-            render(table, id);
-        }
-    };
-}
