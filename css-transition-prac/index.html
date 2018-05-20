@@ -269,6 +269,7 @@
             return self;
         };
         function togglePopup() {
+            
             popup.toggleClass("show", "hide");
             // can use
             //popup.classList.toggle("show");
@@ -276,6 +277,10 @@
         btnShowPopup.addEventListener("click", togglePopup);
         btnHidePopup.addEventListener("click", togglePopup);
         btnAnimate.addEventListener("click", function () { document.body.toggleClass("animation", ""); });
+
+        var d = () => {
+            
+        }
     </script>
 
 </html>
