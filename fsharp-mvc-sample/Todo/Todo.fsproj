@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <MvcRazorCompileOnPublish>true</MvcRazorCompileOnPublish>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Commons\" />
+    <Folder Include="Repos\" />
+  </ItemGroup>
+  <ItemGroup>
+    
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\Home\About.cshtml" />
+    <Content Remove="Views\Home\Contact.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commons\CommonTypes.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commons\CommonTypes.fs" />
+    <Compile Include="Models\Student.fs" />
+    <Compile Include="Repos\StudentRepo.fs" />
+    <Compile Include="Controllers/HomeController.fs" />
+    <Compile Include="Startup.fs" />
+    <Compile Include="Program.fs" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+</Project>

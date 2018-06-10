@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Todo", "Todo.fsproj", "{FC0410B4-990E-43A9-ADFE-9AFCE5854142}"
+EndProject
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Todo.Tests", "..\Todo.Tests\Todo.Tests.fsproj", "{C41FC0D8-DDF1-4F19-A821-3E5FF6215630}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC0410B4-990E-43A9-ADFE-9AFCE5854142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC0410B4-990E-43A9-ADFE-9AFCE5854142}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC0410B4-990E-43A9-ADFE-9AFCE5854142}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC0410B4-990E-43A9-ADFE-9AFCE5854142}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C41FC0D8-DDF1-4F19-A821-3E5FF6215630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C41FC0D8-DDF1-4F19-A821-3E5FF6215630}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C41FC0D8-DDF1-4F19-A821-3E5FF6215630}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C41FC0D8-DDF1-4F19-A821-3E5FF6215630}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
